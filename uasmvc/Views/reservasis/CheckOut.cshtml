@@ -1,0 +1,80 @@
+﻿@model uasmvc.Models.reservasi
+
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+<h2>CheckOut</h2>
+
+<h3>Are you sure you want to CheckOut this?</h3>
+<div>
+    <h4>reservasi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tgtl_reserv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tgtl_reserv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tgl_masuk_reserv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tgl_masuk_reserv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tgl_keluar_reserv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tgl_keluar_reserv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lama_reserv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lama_reserv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status_reserv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status_reserv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kamar.no_kamar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kamar.no_kamar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pelanggan.ktp_pelanggan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pelanggan.ktp_pelanggan)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="CheckOut" class="btn btn-default" /> |
+            <p class="btn btn-default"> @Html.ActionLink("Back to List", "Index") </p>
+        </div>
+    }
+</div>

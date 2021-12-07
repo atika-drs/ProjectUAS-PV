@@ -1,0 +1,52 @@
+﻿@model IEnumerable<uasmvc.Models.pembayaran>
+
+@{
+    ViewBag.Title = "Pembayaran";
+}
+
+<h2>Pembayaran</h2>
+
+<p class="btn btn-default">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p></p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tgl_bayar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_bayar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status_bayar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reservasi.status_reserv)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tgl_bayar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_bayar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status_bayar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reservasi.status_reserv)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PembayaranID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PembayaranID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PembayaranID })
+        </td>
+    </tr>
+}
+
+</table>

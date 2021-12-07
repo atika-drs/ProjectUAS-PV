@@ -1,0 +1,52 @@
+﻿@model IEnumerable<uasmvc.Models.kamar>
+
+@{
+    ViewBag.Title = "Kamar";
+}
+
+<h2>Kamar</h2>
+
+<p class="btn btn-default">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p></p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.no_kamar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nama_kamar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.harga_kamar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status_kamar)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.no_kamar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nama_kamar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.harga_kamar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status_kamar)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.KamarID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.KamarID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.KamarID })
+        </td>
+    </tr>
+}
+
+</table>

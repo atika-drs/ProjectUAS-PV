@@ -1,0 +1,59 @@
+﻿@model IEnumerable<uasmvc.Models.pelanggan>
+
+@{
+    ViewBag.Title = "Pelanggan";
+}
+
+<h2>Pelanggan</h2>
+
+<p class="btn btn-default">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p></p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ktp_pelanggan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nama_pelanggan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email_pelanggan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telp_pelanggan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.alamat_pelanggan)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ktp_pelanggan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nama_pelanggan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email_pelanggan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telp_pelanggan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.alamat_pelanggan)
+        </td>
+        <td>
+            @Html.ActionLink("Check-In", "Create", "reservasis") |
+            @Html.ActionLink("Edit", "Edit", new { id = item.PelangganID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PelangganID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PelangganID })
+        </td>
+    </tr>
+}
+
+</table>

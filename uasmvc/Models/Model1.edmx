@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="uasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="kamar">
+          <Key>
+            <PropertyRef Name="KamarID" />
+          </Key>
+          <Property Name="KamarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_kamar" Type="char" MaxLength="10" />
+          <Property Name="nama_kamar" Type="varchar" MaxLength="50" />
+          <Property Name="harga_kamar" Type="money" Nullable="false" />
+          <Property Name="status_kamar" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="pelanggan">
+          <Key>
+            <PropertyRef Name="PelangganID" />
+          </Key>
+          <Property Name="PelangganID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ktp_pelanggan" Type="char" MaxLength="20" />
+          <Property Name="nama_pelanggan" Type="varchar" MaxLength="50" />
+          <Property Name="email_pelanggan" Type="varchar" MaxLength="50" />
+          <Property Name="telp_pelanggan" Type="char" MaxLength="15" />
+          <Property Name="alamat_pelanggan" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="pembayaran">
+          <Key>
+            <PropertyRef Name="PembayaranID" />
+          </Key>
+          <Property Name="PembayaranID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReservasiID" Type="int" Nullable="false" />
+          <Property Name="tgl_bayar" Type="datetime" />
+          <Property Name="total_bayar" Type="money" Nullable="false" />
+          <Property Name="status_bayar" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="reservasi">
+          <Key>
+            <PropertyRef Name="ReservasiID" />
+          </Key>
+          <Property Name="ReservasiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KamarID" Type="int" Nullable="false" />
+          <Property Name="PelangganID" Type="int" Nullable="false" />
+          <Property Name="tgtl_reserv" Type="datetime" />
+          <Property Name="tgl_masuk_reserv" Type="datetime" />
+          <Property Name="tgl_keluar_reserv" Type="datetime" />
+          <Property Name="lama_reserv" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="status_reserv" Type="char" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_pembayaran_reserv">
+          <End Role="reservasi" Type="Self.reservasi" Multiplicity="1" />
+          <End Role="pembayaran" Type="Self.pembayaran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reservasi">
+              <PropertyRef Name="ReservasiID" />
+            </Principal>
+            <Dependent Role="pembayaran">
+              <PropertyRef Name="ReservasiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reservasi_kamar">
+          <End Role="kamar" Type="Self.kamar" Multiplicity="1" />
+          <End Role="reservasi" Type="Self.reservasi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kamar">
+              <PropertyRef Name="KamarID" />
+            </Principal>
+            <Dependent Role="reservasi">
+              <PropertyRef Name="KamarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reservasi_pelanggan">
+          <End Role="pelanggan" Type="Self.pelanggan" Multiplicity="1" />
+          <End Role="reservasi" Type="Self.reservasi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pelanggan">
+              <PropertyRef Name="PelangganID" />
+            </Principal>
+            <Dependent Role="reservasi">
+              <PropertyRef Name="PelangganID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="uasModelStoreContainer">
+          <EntitySet Name="kamar" EntityType="Self.kamar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pelanggan" EntityType="Self.pelanggan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pembayaran" EntityType="Self.pembayaran" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reservasi" EntityType="Self.reservasi" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_pembayaran_reserv" Association="Self.FK_pembayaran_reserv">
+            <End Role="reservasi" EntitySet="reservasi" />
+            <End Role="pembayaran" EntitySet="pembayaran" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reservasi_kamar" Association="Self.FK_reservasi_kamar">
+            <End Role="kamar" EntitySet="kamar" />
+            <End Role="reservasi" EntitySet="reservasi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reservasi_pelanggan" Association="Self.FK_reservasi_pelanggan">
+            <End Role="pelanggan" EntitySet="pelanggan" />
+            <End Role="reservasi" EntitySet="reservasi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="uasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="kamar">
+          <Key>
+            <PropertyRef Name="KamarID" />
+          </Key>
+          <Property Name="KamarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_kamar" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="nama_kamar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="harga_kamar" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="status_kamar" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="reservasi" Relationship="Self.FK_reservasi_kamar" FromRole="kamar" ToRole="reservasi" />
+        </EntityType>
+        <EntityType Name="pelanggan">
+          <Key>
+            <PropertyRef Name="PelangganID" />
+          </Key>
+          <Property Name="PelangganID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ktp_pelanggan" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="nama_pelanggan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email_pelanggan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telp_pelanggan" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="alamat_pelanggan" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reservasi" Relationship="Self.FK_reservasi_pelanggan" FromRole="pelanggan" ToRole="reservasi" />
+        </EntityType>
+        <EntityType Name="pembayaran">
+          <Key>
+            <PropertyRef Name="PembayaranID" />
+          </Key>
+          <Property Name="PembayaranID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReservasiID" Type="Int32" Nullable="false" />
+          <Property Name="tgl_bayar" Type="DateTime" Precision="3" />
+          <Property Name="total_bayar" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="status_bayar" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="reservasi" Relationship="Self.FK_pembayaran_reserv" FromRole="pembayaran" ToRole="reservasi" />
+        </EntityType>
+        <EntityType Name="reservasi">
+          <Key>
+            <PropertyRef Name="ReservasiID" />
+          </Key>
+          <Property Name="ReservasiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KamarID" Type="Int32" Nullable="false" />
+          <Property Name="PelangganID" Type="Int32" Nullable="false" />
+          <Property Name="tgtl_reserv" Type="DateTime" Precision="3" />
+          <Property Name="tgl_masuk_reserv" Type="DateTime" Precision="3" />
+          <Property Name="tgl_keluar_reserv" Type="DateTime" Precision="3" />
+          <Property Name="lama_reserv" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="status_reserv" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="kamar" Relationship="Self.FK_reservasi_kamar" FromRole="reservasi" ToRole="kamar" />
+          <NavigationProperty Name="pelanggan" Relationship="Self.FK_reservasi_pelanggan" FromRole="reservasi" ToRole="pelanggan" />
+          <NavigationProperty Name="pembayaran" Relationship="Self.FK_pembayaran_reserv" FromRole="reservasi" ToRole="pembayaran" />
+        </EntityType>
+        <Association Name="FK_reservasi_kamar">
+          <End Role="kamar" Type="Self.kamar" Multiplicity="1" />
+          <End Role="reservasi" Type="Self.reservasi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kamar">
+              <PropertyRef Name="KamarID" />
+            </Principal>
+            <Dependent Role="reservasi">
+              <PropertyRef Name="KamarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reservasi_pelanggan">
+          <End Role="pelanggan" Type="Self.pelanggan" Multiplicity="1" />
+          <End Role="reservasi" Type="Self.reservasi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pelanggan">
+              <PropertyRef Name="PelangganID" />
+            </Principal>
+            <Dependent Role="reservasi">
+              <PropertyRef Name="PelangganID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pembayaran_reserv">
+          <End Role="reservasi" Type="Self.reservasi" Multiplicity="1" />
+          <End Role="pembayaran" Type="Self.pembayaran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reservasi">
+              <PropertyRef Name="ReservasiID" />
+            </Principal>
+            <Dependent Role="pembayaran">
+              <PropertyRef Name="ReservasiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="uasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="kamar" EntityType="Self.kamar" />
+          <EntitySet Name="pelanggan" EntityType="Self.pelanggan" />
+          <EntitySet Name="pembayaran" EntityType="Self.pembayaran" />
+          <EntitySet Name="reservasi" EntityType="Self.reservasi" />
+          <AssociationSet Name="FK_reservasi_kamar" Association="Self.FK_reservasi_kamar">
+            <End Role="kamar" EntitySet="kamar" />
+            <End Role="reservasi" EntitySet="reservasi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reservasi_pelanggan" Association="Self.FK_reservasi_pelanggan">
+            <End Role="pelanggan" EntitySet="pelanggan" />
+            <End Role="reservasi" EntitySet="reservasi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pembayaran_reserv" Association="Self.FK_pembayaran_reserv">
+            <End Role="reservasi" EntitySet="reservasi" />
+            <End Role="pembayaran" EntitySet="pembayaran" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="uasModelStoreContainer" CdmEntityContainer="uasEntities">
+          <EntitySetMapping Name="kamar">
+            <EntityTypeMapping TypeName="uasModel.kamar">
+              <MappingFragment StoreEntitySet="kamar">
+                <ScalarProperty Name="KamarID" ColumnName="KamarID" />
+                <ScalarProperty Name="no_kamar" ColumnName="no_kamar" />
+                <ScalarProperty Name="nama_kamar" ColumnName="nama_kamar" />
+                <ScalarProperty Name="harga_kamar" ColumnName="harga_kamar" />
+                <ScalarProperty Name="status_kamar" ColumnName="status_kamar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pelanggan">
+            <EntityTypeMapping TypeName="uasModel.pelanggan">
+              <MappingFragment StoreEntitySet="pelanggan">
+                <ScalarProperty Name="PelangganID" ColumnName="PelangganID" />
+                <ScalarProperty Name="ktp_pelanggan" ColumnName="ktp_pelanggan" />
+                <ScalarProperty Name="nama_pelanggan" ColumnName="nama_pelanggan" />
+                <ScalarProperty Name="email_pelanggan" ColumnName="email_pelanggan" />
+                <ScalarProperty Name="telp_pelanggan" ColumnName="telp_pelanggan" />
+                <ScalarProperty Name="alamat_pelanggan" ColumnName="alamat_pelanggan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pembayaran">
+            <EntityTypeMapping TypeName="uasModel.pembayaran">
+              <MappingFragment StoreEntitySet="pembayaran">
+                <ScalarProperty Name="PembayaranID" ColumnName="PembayaranID" />
+                <ScalarProperty Name="ReservasiID" ColumnName="ReservasiID" />
+                <ScalarProperty Name="tgl_bayar" ColumnName="tgl_bayar" />
+                <ScalarProperty Name="total_bayar" ColumnName="total_bayar" />
+                <ScalarProperty Name="status_bayar" ColumnName="status_bayar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reservasi">
+            <EntityTypeMapping TypeName="uasModel.reservasi">
+              <MappingFragment StoreEntitySet="reservasi">
+                <ScalarProperty Name="ReservasiID" ColumnName="ReservasiID" />
+                <ScalarProperty Name="KamarID" ColumnName="KamarID" />
+                <ScalarProperty Name="PelangganID" ColumnName="PelangganID" />
+                <ScalarProperty Name="tgtl_reserv" ColumnName="tgtl_reserv" />
+                <ScalarProperty Name="tgl_masuk_reserv" ColumnName="tgl_masuk_reserv" />
+                <ScalarProperty Name="tgl_keluar_reserv" ColumnName="tgl_keluar_reserv" />
+                <ScalarProperty Name="lama_reserv" ColumnName="lama_reserv" />
+                <ScalarProperty Name="status_reserv" ColumnName="status_reserv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

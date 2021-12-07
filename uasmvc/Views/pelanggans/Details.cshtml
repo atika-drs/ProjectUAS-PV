@@ -1,0 +1,61 @@
+﻿@model uasmvc.Models.pelanggan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>pelanggan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ktp_pelanggan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ktp_pelanggan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nama_pelanggan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nama_pelanggan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_pelanggan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_pelanggan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telp_pelanggan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telp_pelanggan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.alamat_pelanggan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alamat_pelanggan)
+        </dd>
+
+    </dl>
+</div>
+<p class="btn btn-default">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PelangganID }) 
+</p>
+    |
+<p class="btn btn-default">
+    @Html.ActionLink("Back to List", "Index")
+</p>

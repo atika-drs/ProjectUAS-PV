@@ -1,0 +1,53 @@
+﻿@model uasmvc.Models.kamar
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>kamar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.no_kamar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.no_kamar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nama_kamar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nama_kamar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.harga_kamar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.harga_kamar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status_kamar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status_kamar)
+        </dd>
+
+    </dl>
+</div>
+<p class="btn btn-default">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KamarID }) 
+</p>
+    |
+<p class="btn btn-default">
+    @Html.ActionLink("Back to List", "Index")
+</p>

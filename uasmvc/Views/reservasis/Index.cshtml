@@ -1,0 +1,76 @@
+﻿@model IEnumerable<uasmvc.Models.reservasi>
+
+@{
+    ViewBag.Title = "Reservasi";
+}
+
+<h2>Reservasi</h2>
+
+<p class="btn btn-default">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p></p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tgtl_reserv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tgl_masuk_reserv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tgl_keluar_reserv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lama_reserv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status_reserv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kamar.no_kamar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pelanggan.ktp_pelanggan)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tgtl_reserv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tgl_masuk_reserv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tgl_keluar_reserv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lama_reserv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status_reserv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kamar.no_kamar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pelanggan.ktp_pelanggan)
+        </td>
+        <td>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ReservasiID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ReservasiID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ReservasiID })
+            </p>
+            <p>
+                @Html.ActionLink("CheckOut", "Edit", new { id = item.ReservasiID }) |
+                @Html.ActionLink("Bayar", "Edit", "pembayarans", new { id = item.ReservasiID }, null)
+            </p>
+        </td>
+    </tr>
+}
+
+</table>

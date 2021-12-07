@@ -1,0 +1,53 @@
+﻿@model uasmvc.Models.pembayaran
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>pembayaran</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tgl_bayar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tgl_bayar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_bayar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_bayar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status_bayar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status_bayar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reservasi.status_reserv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reservasi.status_reserv)
+        </dd>
+
+    </dl>
+</div>
+<p class="btn btn-default">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PembayaranID })
+</p>
+    |
+<p class="btn btn-default">
+    @Html.ActionLink("Back to List", "Index")
+</p>
